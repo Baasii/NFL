@@ -8,18 +8,30 @@ let vierasScore = 0;
 let kotiHyokkaa = false;
 let downYd = 0;
 
+let eventTxt = document.getElementById('event');
+let controlTxt = document.getElementById('event');
+let ydTxt = document.getElementById('yd');
+let downTxt = document.getElementById('down')
+let fieldTxt = document.getElementById('field');
+let scoreTxt = document.getElementById('score');
+
+let passBtn = document.getElementById('pass');
+let runBtn = document.getElementById('run');
+let kickBtn = document.getElementById('kick');
+
 fieldYd = kickOff();
 
-document.getElementById('yd').innerHTML = 'Last play gained ' + gainedYd;
-document.getElementById('down').innerHTML = down + '. Down & ' + (10 - downYd);
+ydTxt.innerHTML = 'Last play gained ' + gainedYd;
+downTxt.innerHTML = down + '. Down & ' + (10 - downYd);
 
 if (omaKenttaPuoli) {
-  document.getElementById('field').innerHTML = 'Own ' + fieldYd;
+  fieldTxt.innerHTML = 'Own ' + fieldYd;
 } else {
-  document.getElementById('field').innerHTML = 'Opp ' + fieldYd;
+  fieldTxt.innerHTML = 'Opp ' + fieldYd;
 }
 
 function pass() {
+  eventTxt.style.display = 'none';
   yd = getYd(-2, 20);
   gainedYd = gainedYd + yd;
   downYd = downYd + yd;
@@ -28,20 +40,21 @@ function pass() {
   downReset();
 
   if (yd > 0)
-    document.getElementById('yd').innerHTML = 'Last play gained ' + gainedYd;
-  else document.getElementById('yd').innerHTML = 'Last play lost ' + gainedYd;
-  document.getElementById('down').innerHTML =
+    ydTxt.innerHTML = 'Last play gained ' + gainedYd;
+  else ydTxt.innerHTML = 'Last play lost ' + gainedYd;
+  downTxt.innerHTML =
     down + '. Down & ' + (10 - downYd);
   if (omaKenttaPuoli) {
-    document.getElementById('field').innerHTML = 'Own ' + fieldYd;
+    fieldTxt.innerHTML = 'Own ' + fieldYd;
   } else {
-    document.getElementById('field').innerHTML = 'Opp ' + fieldYd;
+    fieldTxt.innerHTML = 'Opp ' + fieldYd;
   }
   touchdown();
   gainedYd = 0;
 }
 function run() {
-  yd = getYd(-2, 2);
+  eventTxt.style.display = 'none';
+  yd = getYd(-2, 8);
   gainedYd = gainedYd + yd;
   downYd = downYd + yd;
   fieldYd = fieldPos(fieldYd, yd);
@@ -49,14 +62,14 @@ function run() {
   downReset();
 
   if (yd > 0)
-    document.getElementById('yd').innerHTML = 'Last play gained ' + gainedYd;
-  else document.getElementById('yd').innerHTML = 'Last play lost ' + gainedYd;
-  document.getElementById('down').innerHTML =
+    ydTxt.innerHTML = 'Last play gained ' + gainedYd;
+  else ydTxt.innerHTML = 'Last play lost ' + gainedYd;
+  downTxt.innerHTML =
     down + '. Down & ' + (10 - downYd);
   if (omaKenttaPuoli) {
-    document.getElementById('field').innerHTML = 'Own ' + fieldYd;
+    fieldTxt.innerHTML = 'Own ' + fieldYd;
   } else {
-    document.getElementById('field').innerHTML = 'Opp ' + fieldYd;
+    fieldTxt.innerHTML = 'Opp ' + fieldYd;
   }
   touchdown();
   gainedYd = 0;
@@ -72,7 +85,6 @@ function downReset() {
   if (downYd >= 10) {
     down = 1;
     downYd = 0;
-    //down = 1;
   } else if (down > 4) {
     turnover();
   }
@@ -101,7 +113,9 @@ function fieldPos(fieldYd, yd) {
 
 function touchdown() {
   if (fieldYd < 0) {
-    document.getElementById('td').innerHTML = 'TOUCHDOWN';
+    // setInterval(tdteksti, 1000)
+    eventTxt.style.display = 'block';
+    eventTxt.innerHTML = 'TOUCHDOWN';
     down = 1;
     downYd = 0;
     if (kotiHyokkaa) {
@@ -109,15 +123,16 @@ function touchdown() {
     } else {
       vierasScore = vierasScore + 6;
     }
-    document.getElementById('pass').style.display = 'none';
-    document.getElementById('run').style.display = 'none';
-    document.getElementById('kick').style.display = 'block';
+    passBtn.style.display = 'none';
+    runBtn.style.display = 'none';
+    kickBtn.style.display = 'block';
   }
 
-  document.getElementById('score').innerHTML = kotiScore + ' - ' + vierasScore;
+  scoreTxt.innerHTML = kotiScore + ' - ' + vierasScore;
 }
 
 function kickOff() {
+  eventTxt.style.display = 'none';
   laskeKickOff = getYd(1, 1000);
   if (laskeKickOff < 800) {
     fieldYd = 25;
@@ -135,21 +150,21 @@ function kickOff() {
 
   if (kotiHyokkaa) {
     kotiHyokkaa = false;
-    document.getElementById('control').innerHTML = 'Vieras Hyökkää';
+    controlTxt.innerHTML = 'Vieras Hyökkää';
   } else {
     kotiHyokkaa = true;
-    document.getElementById('control').innerHTML = 'Koti Hyökkää';
+    controlTxt.innerHTML = 'Koti Hyökkää';
   }
 
   console.log(fieldYd);
   console.log(laskeKickOff);
 
-  document.getElementById('pass').style.display = 'block';
-  document.getElementById('run').style.display = 'block';
-  document.getElementById('kick').style.display = 'none';
+  passBtn.style.display = 'block';
+  runBtn.style.display = 'block';
+  kickBtn.style.display = 'none';
 
-  document.getElementById('field').innerHTML = 'Own ' + fieldYd;
-  document.getElementById('down').innerHTML =
+  fieldTxt.innerHTML = 'Own ' + fieldYd;
+  downTxt.innerHTML =
     down + '. Down & ' + (10 - downYd);
 
   touchdown();
@@ -159,14 +174,30 @@ function kickOff() {
 function turnover() {
   down = 1;
   downYd = 0;
-  document.getElementById('td').innerHTML = 'TURNOVER';
+  eventTxt.style.display = 'block';
+  eventTxt.innerHTML = 'TURNOVER';
   if (kotiHyokkaa) {
     kotiHyokkaa = false;
-    document.getElementById('control').innerHTML = 'Vieras Hyökkää';
+    controlTxt.innerHTML = 'Vieras Hyökkää';
     if (omaKenttaPuoli) omaKenttaPuoli = false;
     else omaKenttaPuoli = true;
   } else {
     kotiHyokkaa = true;
-    document.getElementById('control').innerHTML = 'Koti Hyökkää';
+    controlTxt.innerHTML = 'Koti Hyökkää';
   }
 }
+
+function tdteksti() {
+  eventTxt.style.display = 'none' ? '' : 'none';
+
+
+
+}
+function vaihdavari() {
+  eventTxt.style.color = 'red' ? 'blue' : 'red';
+}
+
+
+// setInterval(function() {
+//   f.style.display = (f.style.display == 'none' ? '' : 'none');
+// }, 1000);
