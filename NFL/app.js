@@ -1,3 +1,7 @@
+document.getElementById('pass').addEventListener('click', pass);
+document.getElementById('run').addEventListener('click', run);
+document.getElementById('kick').addEventListener('click', kickOff);
+
 let down = 1;
 let gainedYd = 0;
 let fieldYd = 1;
@@ -9,9 +13,9 @@ let kotiHyokkaa = false;
 let downYd = 0;
 
 let eventTxt = document.getElementById('event');
-let controlTxt = document.getElementById('event');
+let controlTxt = document.getElementById('control');
 let ydTxt = document.getElementById('yd');
-let downTxt = document.getElementById('down')
+let downTxt = document.getElementById('down');
 let fieldTxt = document.getElementById('field');
 let scoreTxt = document.getElementById('score');
 
@@ -39,11 +43,9 @@ function pass() {
 
   downReset();
 
-  if (yd > 0)
-    ydTxt.innerHTML = 'Last play gained ' + gainedYd;
+  if (yd > 0) ydTxt.innerHTML = 'Last play gained ' + gainedYd;
   else ydTxt.innerHTML = 'Last play lost ' + gainedYd;
-  downTxt.innerHTML =
-    down + '. Down & ' + (10 - downYd);
+  downTxt.innerHTML = down + '. Down & ' + (10 - downYd);
   if (omaKenttaPuoli) {
     fieldTxt.innerHTML = 'Own ' + fieldYd;
   } else {
@@ -61,11 +63,9 @@ function run() {
 
   downReset();
 
-  if (yd > 0)
-    ydTxt.innerHTML = 'Last play gained ' + gainedYd;
+  if (yd > 0) ydTxt.innerHTML = 'Last play gained ' + gainedYd;
   else ydTxt.innerHTML = 'Last play lost ' + gainedYd;
-  downTxt.innerHTML =
-    down + '. Down & ' + (10 - downYd);
+  downTxt.innerHTML = down + '. Down & ' + (10 - downYd);
   if (omaKenttaPuoli) {
     fieldTxt.innerHTML = 'Own ' + fieldYd;
   } else {
@@ -113,7 +113,7 @@ function fieldPos(fieldYd, yd) {
 
 function touchdown() {
   if (fieldYd < 0) {
-    // setInterval(tdteksti, 1000)
+    setInterval(tdTeksti, 500);
     eventTxt.style.display = 'block';
     eventTxt.innerHTML = 'TOUCHDOWN';
     down = 1;
@@ -164,8 +164,7 @@ function kickOff() {
   kickBtn.style.display = 'none';
 
   fieldTxt.innerHTML = 'Own ' + fieldYd;
-  downTxt.innerHTML =
-    down + '. Down & ' + (10 - downYd);
+  downTxt.innerHTML = down + '. Down & ' + (10 - downYd);
 
   touchdown();
   return fieldYd;
@@ -174,8 +173,7 @@ function kickOff() {
 function turnover() {
   down = 1;
   downYd = 0;
-  eventTxt.style.display = 'block';
-  eventTxt.innerHTML = 'TURNOVER';
+  turnoverTeksti();
   if (kotiHyokkaa) {
     kotiHyokkaa = false;
     controlTxt.innerHTML = 'Vieras Hyökkää';
@@ -187,17 +185,12 @@ function turnover() {
   }
 }
 
-function tdteksti() {
-  eventTxt.style.display = 'none' ? '' : 'none';
-
-
-
-}
-function vaihdavari() {
-  eventTxt.style.color = 'red' ? 'blue' : 'red';
+function tdTeksti() {
+  eventTxt.style.color = eventTxt.style.color == 'red' ? 'blue' : 'red';
 }
 
-
-// setInterval(function() {
-//   f.style.display = (f.style.display == 'none' ? '' : 'none');
-// }, 1000);
+function turnoverTeksti() {
+  eventTxt.style.color = 'red';
+  eventTxt.style.display = 'block';
+  eventTxt.innerHTML = 'TURNOVER';
+}
