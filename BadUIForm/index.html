@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="popup">
+      <span class="helper"></span>
+      <div>
+        <div class="popupCloseButton">&times;</div>
+        <p>Haluatko varmasti tyhjentää kentän ?</p>
+        <button type="button" class="btn btn-danger clear">Kyllä</button>
+
+        <button type="button" class="btn btn-success noclear">Ei</button>
+      </div>
+    </div>
+
+    <div class="popup_2">
+      <span class="helper"></span>
+      <div>
+        <div class="popupCloseButton">&times;</div>
+        <iframe
+          width="853"
+          height="345"
+          autoplay="1"
+          src="https://www.youtube.com/embed/qMUZ-CLdZIs?autoplay=1&enablejsapi=1"
+        >
+        </iframe>
+      </div>
+    </div>
+    <div class="testclass">
+      <h1 class="asd">Liity jäseneksi</h1>
+      <form action="" autocomplete="off">
+        <input
+          type="text"
+          id="firstname"
+          name="firstname"
+          value=""
+          placeholder="Etunimi"
+        />
+        <input
+          type="text"
+          id="lastname"
+          name="lastname"
+          value=""
+          placeholder="Sukunimi"
+        />
+        <input
+          type="text"
+          id="address"
+          name="address"
+          value=""
+          placeholder="Osoite"
+        />
+        <select id="postcode-dropdown"></select>
+        <br />
+        <input
+          type="text"
+          id="phone"
+          name="phone"
+          value=""
+          placeholder="Puhelin"
+          readonly
+        />
+        <select id="dropdown">
+          <option>0</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+        </select>
+        <button type="button" class="btn btn-primary insert">Syötä</button>
+        <button type="button" class="btn btn-danger trigger_popup_fricc">
+          Tyhjennä
+        </button>
+        <br />
+        <p>Haluan tilata viikottaisen uutiskirjeen.</p>
+        <input type="radio" id="yes" name="joinnews" value="yes" />
+        <label for="yes">Kyllä</label><br />
+        <div class="touchMeNot">
+          <input type="radio" id="no" name="joinnews" value="no" />
+          <label for="no">Ei</label><br />
+        </div>
+        <br />
+        <br />
+      </form>
+      <button id="send" class="btn btn-success insert">Lähetä</button>
+       
+    </div>
+
+    <div class="popup_3">
+        <span class="helper"></span>
+        <div>
+          <!--<div class="popupCloseButton">&times;</div>-->
+          <article>
+            <div class="top">
+              <h3 style="margin-top:2px;cursor:pointer" id="close2" onclick="close2"></h3><h3>Lähetetään...</h3>
+            </div>
+            <div class="mid">
+              <div class="midtitle"><span id="msgauth"></span>
+      </div>
+              <div id="myProgress">
+                <div id="myBar"></div>
+      </div>
+            </div>
+        </div>
+      </div>
+
+    
+        
+        
+      </article> 
+  </body>
+</html>

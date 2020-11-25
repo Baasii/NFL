@@ -36,7 +36,7 @@ if (omaKenttaPuoli) {
 
 function pass() {
   eventTxt.style.display = 'none';
-  yd = getYd(-2, 20);
+  yd = getYd(-2, 50);
   gainedYd = gainedYd + yd;
   downYd = downYd + yd;
   fieldYd = fieldPos(fieldYd, yd);
@@ -56,7 +56,7 @@ function pass() {
 }
 function run() {
   eventTxt.style.display = 'none';
-  yd = getYd(-2, 8);
+  yd = getYd(-2, 2);
   gainedYd = gainedYd + yd;
   downYd = downYd + yd;
   fieldYd = fieldPos(fieldYd, yd);
@@ -114,6 +114,7 @@ function fieldPos(fieldYd, yd) {
 function touchdown() {
   if (fieldYd < 0) {
     setInterval(tdTeksti, 500);
+    
     eventTxt.style.display = 'block';
     eventTxt.innerHTML = 'TOUCHDOWN';
     down = 1;
